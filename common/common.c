@@ -12,7 +12,7 @@ char *get_value(char *path, char *key) {
     ssize_t nrd;
     char *line = NULL, *sub = NULL;
     size_t linecap = 0;
-    extern char ans[50];
+    extern char conf_ans[50];
 
     if (path == NULL || key == NULL) {
         fprintf(stderr, "Error in argument!\n");
@@ -27,8 +27,8 @@ char *get_value(char *path, char *key) {
     while ((nrd = getline(&line, &linecap, fp)) != -1) {
         if ((sub = strstr(line, key)) == NULL) continue;
         if (line[strlen(key)] == '=') {
-            strncpy(ans, sub + strlen(key) + 1, nrd - strlen(key) - 2); 
-            *(ans + nrd - strlen(key) - 1) = '\0';
+            strncpy(conf_ans, sub + strlen(key) + 1, nrd - strlen(key) - 2); 
+            *(conf_ans + nrd - strlen(key) - 1) = '\0';
             break;
         }
     }
@@ -37,7 +37,7 @@ char *get_value(char *path, char *key) {
     if (sub == NULL) {
         return NULL;
     }
-    return ans;
+    return conf_ans;
 }
 
 
