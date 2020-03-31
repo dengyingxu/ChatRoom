@@ -85,6 +85,10 @@ int main() {
         }
         if (check_online(recvmsg.msg.from)) {
             //拒绝连接
+            msg.flag = 3;
+            strcpy(msg.message, "You have Already Login System!");
+            chat_send(msg, fd);
+            close(fd);
             continue;
         }
         msg.flag = 2;
