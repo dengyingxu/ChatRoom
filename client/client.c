@@ -50,6 +50,13 @@ int main() {
         return 1;
     }
 
+    printf(GREEN"Server "NONE": %s\n", rmsg.msg.message);
+
+    if (rmsg.msg.flag == 3) {
+        close(sockfd);
+        return 1;
+    }
+
     pid_t pid;
     if ((pid = fork()) < 0) {
         perror("fork");
